@@ -34,7 +34,7 @@ jobs:
               pkg install -y python clang make swig binutils pkg-config \
                               libjpeg-turbo freetype
 
-              python -m pip install --upgrade pip wheel setuptools psutil
+              python -m pip install --upgrade pip wheel setuptools
 
               cd ~
               if [ -n "${PYMUPDF_VERSION:-}" ]; then
