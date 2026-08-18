@@ -37,7 +37,7 @@ jobs:
               python -m pip install --upgrade pip wheel setuptools
 
               cd ~
-              if [ -n "$PYMUPDF_VERSION" ]; then
+              if [ -n "${PYMUPDF_VERSION:-}" ]; then
                 PKG="pymupdf==$PYMUPDF_VERSION"
               else
                 PKG="pymupdf"
