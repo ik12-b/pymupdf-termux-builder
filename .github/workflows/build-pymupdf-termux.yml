@@ -34,7 +34,7 @@ jobs:
               pkg install -y python clang make swig binutils pkg-config \
                               libjpeg-turbo freetype
 
-              python -m pip install --upgrade pip wheel setuptools
+              python -m pip install --upgrade pip wheel setuptools psutil
 
               cd ~
               if [ -n "${PYMUPDF_VERSION:-}" ]; then
@@ -43,11 +43,15 @@ jobs:
                 PKG="pymupdf"
               fi
 
-              # -O1: compile lebih cepat & hemat RAM, tidak mengurangi fitur
+              export CC=clang
+              export CXX=clang++
+              export MUPDF_SETUP_USE_CLANG_PYTHON=0
+              export MUPDF_SETUP_USE_SWIG=1
+              export PYMUPDF_SETUP_SWIG="$(command -v swig)"
               export CFLAGS="-O1 -pipe"
               export CXXFLAGS="-O1 -pipe"
 
-              python -m pip wheel "$PKG" -w ~/dist --no-deps -v
+              python -m pip wheel "$PKG" -w ~/dist --no-deps --no-build-isolation -v
               cp ~/dist/*.whl /data/data/com.termux/files/home/dist/
             '
 
