@@ -30,7 +30,7 @@ jobs:
             termux/termux-docker:aarch64 \
             bash -lc '
               set -euxo pipefail
-              yes | pkg update -y
+              pkg update -y
               pkg install -y python clang make swig binutils pkg-config \
                               libjpeg-turbo freetype
 
